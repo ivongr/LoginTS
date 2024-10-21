@@ -1,28 +1,29 @@
-import { useState } from 'react'
-import './App.css'
-import counter from "./counter"
+import { useState } from 'react';
+import { useRef } from 'react';
+import './App.css';
+import React from 'react';
+import useCount from './counter';
 
 
 function App() {
-  const [btnIncrement, setIncrement] = useState(0);
+  const {count, Increment, Decrease} = useCount(0);
 
-  const handleClick = (event) => {
-    setIncrement(count => count += 1)
-};
+  //const [count, setCount] = useState(0);
 
-const decrease = () => {
-    setCount(count => count -= 1)
-}
-  
-  const onClick = () => {
-    increment,
-    decrease
+  function handleClick() {
+    setCount(parseInt(number.current.value));
   }
+ 
+  const number = useRef(null);
+
+
   return (
     <>
-      {count}
-      <button onClick={handleClick}>Increment</button>
-      <button onClick={decrease}>Decrement</button>
+      <input id="counter" type="number" ref={number}></input>
+      <button onClick={handleClick}>Ingresar</button>
+      <h1>Contador {count}</h1>
+      <button className="success" onClick={Increment}>Incrementar</button>
+      <button className="danger" onClick={Decrease} >Disminuir</button>
     </>
   )
 }
